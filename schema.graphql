@@ -1,0 +1,2189 @@
+"""Учетная запись"""
+type account {
+  """Идентификатор"""
+  id: ID!
+
+  """Логин"""
+  login: String!
+
+  """Надежный"""
+  reliable: Boolean
+
+  """Группа"""
+  group: user_group
+
+  """Профиль"""
+  profile: user_profile
+
+  """Статистика по заказам"""
+  orders_statistics: user_orders_statistics
+
+  """Статистика по отзывам"""
+  reviews_statistics: user_reviews_statistics
+
+  """URL ссылка на аватар"""
+  avatar: String!
+
+  """URL ссылка на профиль"""
+  small_avatar: String!
+
+  """URL ссылка на профиль"""
+  profile_link: String!
+
+  """Дата регистрации"""
+  date_registration: String!
+
+  """Дата последнего визита"""
+  date_last_visit: String
+
+  """Эл. почта"""
+  email: String!
+
+  """Телефон"""
+  phone: String
+
+  """Телефон смс защиты"""
+  phone_sms_protected: String
+
+  """Баланс"""
+  balance: Int!
+
+  """Бонусный баланс"""
+  balance_bonus: Int!
+
+  """Кешбек баланс"""
+  balance_cashback: Int!
+
+  """Замороженные средства на счету"""
+  balance_frozen: Int!
+
+  """Доход"""
+  income: Int!
+
+  """Ожидаемый доход"""
+  income_expected: Int!
+
+  """Состояние активации аккаунта"""
+  account_activated: Boolean!
+
+  """Установлен ли аватар"""
+  avatar_set: Boolean!
+
+  """Дата рождения"""
+  date_birth: String
+
+  """Показывать ли информацию о черном списке"""
+  info_of_black_list: Boolean
+
+  """Количество созданных заказов"""
+  count_created_orders: Int
+
+  """Ключ для подписи на приватрые каналы"""
+  socket_key: String
+
+  """Ключ подтверждения"""
+  confirm_key: String
+
+  """Статус исполнителя"""
+  executor_status: String
+
+  """Предлагать ли отправить чаевые"""
+  show_review_gratuity: Boolean
+
+  """Заполен ли необходимый минимум профиля"""
+  profile_filled: Boolean
+
+  """
+  Показывать ли метку new для раздела бонусов после отправки сообщения о бонусах
+  """
+  show_bonuses_new_mark: Boolean
+
+  """Выбран ли способ оповещния"""
+  notification_method_selected: Boolean
+
+  """Id AB теста"""
+  ab_test_id: Int!
+
+  """Язык интерфейса"""
+  language: String
+
+  """Настройки аккаунта"""
+  settings: user_settings
+}
+
+"""Доп информация об аккаунте"""
+type account_info {
+  """Количество новых (непрочитанных) сообщений"""
+  new_messages: Int!
+
+  """Количество новых (непрочитанных) сообщений о заказах"""
+  new_messages_of_orders: Int!
+
+  """Информация по количеству заказов"""
+  help_info: help_info
+}
+
+"""Результат"""
+type account_result {
+  """Аккаунт"""
+  account: account
+
+  """Информация о проделанной операции"""
+  operation_status: operation_status
+}
+
+"""Арбитражное дело"""
+type arbitration_case {
+  """Идентификатор"""
+  id: ID!
+
+  """Идентификатор заказа"""
+  order_id: String!
+
+  """Дата подачи заявки"""
+  date_apply: String!
+
+  """Статуст заяки"""
+  status: String!
+
+  """Заключение"""
+  conclusion: String!
+}
+
+"""Результат"""
+type arbitration_case_result {
+  """Арбитражное дело"""
+  arbitration_case: arbitration_case
+
+  """Информация о проделанной операции"""
+  operation_status: operation_status
+}
+
+"""Информация о сеансе"""
+type auth_info {
+  """Учетная запись"""
+  account: account
+
+  """Доп информация об аккаунте"""
+  account_info: account_info
+}
+
+"""Количества заказов по статусам"""
+type counts_orders_by_status {
+  """Количество новых заказов"""
+  count_new: Int
+
+  """Количество прошедших заказов"""
+  count_past: Int
+
+  """Количество заказов на подтверждении"""
+  count_confirmation: Int
+
+  """Количество заказов ожидающих оплаты"""
+  count_wait_payment: Int
+
+  """Количество заказов на выполнении"""
+  count_execution: Int
+
+  """Количество заказов на гарантии"""
+  count_guarantee: Int
+
+  """Количество выполненных заказов"""
+  count_complete: Int
+
+  """Количество заказов на доработке"""
+  count_rework: Int
+}
+
+"""Список заказов по статусам"""
+type customer_orders_by_status_list {
+  """Заказы"""
+  list: [order]
+
+  """Количества заказов по статусам"""
+  list_info: counts_orders_by_status
+
+  """Пагинация"""
+  pagination: pagination
+}
+
+"""Статистика исполнителя за период"""
+type executor_statistics {
+  """Количество заказов"""
+  count_orders: Int!
+
+  """Доход"""
+  income: Int!
+
+  """Начало периода"""
+  period_begin: String
+
+  """Конец периода"""
+  period_end: String
+}
+
+"""Список исполнителей"""
+type executors_list {
+  """Фрилансеры"""
+  list: [user]
+
+  """Пагинация"""
+  pagination: pagination
+}
+
+"""Вспомогательная информация"""
+type help_info {
+  """Заказы на подтверждении"""
+  confirmation: Int
+}
+
+"""Результат"""
+type login_result {
+  """Токен авторизации"""
+  token: String
+
+  """Информация о проделанной операции"""
+  operation_status: operation_status
+}
+
+"""Личное сообщение"""
+type message {
+  """Идентификатор"""
+  id: ID!
+
+  """Дата отправки"""
+  date_send: String!
+
+  """Сообщение новое"""
+  new: Boolean!
+
+  """Сообщение"""
+  message: String!
+
+  """Сообщение в формате для мобильного приложения"""
+  mobile_message: String!
+}
+
+"""Список сообщений"""
+type messages_list {
+  """Сообщения"""
+  list: [message]
+
+  """Пагинация"""
+  pagination: pagination
+}
+
+type Mutation {
+  """Редактирование профиля пользователя"""
+  edit_profile(
+    """Город"""
+    city: String
+
+    """Учебное заведение"""
+    institution: String
+
+    """Факультет"""
+    faculty: String
+
+    """Специальность"""
+    specialty: String
+
+    """Опыт работы"""
+    experience: String
+
+    """Ключевые слова"""
+    keywords: String
+
+    """Email"""
+    email: String
+
+    """Телефон"""
+    phone: String
+
+    """Дата рождения"""
+    date_birth: String
+
+    """Добавить предметы"""
+    add_subject: String
+
+    """Удалить предметы"""
+    delete_subject: String
+
+    """Язык интерфейса"""
+    language: String
+  ): account_result
+
+  """Редактирование настроек пользователя"""
+  edit_settings(
+    """Оповещение по электронной почте"""
+    notification_on_mail: String
+
+    """Оповещение по VK"""
+    notification_on_vk: String
+
+    """VK идентификатор"""
+    vk_id: String
+
+    """Показ подсказок"""
+    help_show: String
+
+    """Прием сообщений от незнакомых заказчиков"""
+    message_unknown_customer: String
+
+    """Настройка группировки писем о новых заказах"""
+    group_sending_orders: String
+
+    """
+    Настройка оповещения о новых заказах (site_and_email, only_site, only_email, off)
+    """
+    notification_new_order: String
+  ): account_result
+
+  """Установка флага заполнения необходимого минимума профиля"""
+  mark_profile_filled: account_result
+
+  """Изменение пароля пользователя"""
+  change_password(
+    """Старый пароль"""
+    old_password: String
+
+    """Новый пароль"""
+    password: String
+
+    """Повтор нового пароля"""
+    password_confirmation: String
+  ): result
+
+  """Смена почты до активации аккаунта"""
+  change_activation_email(
+    """Новый email"""
+    email: String
+  ): account_result
+
+  """Смена телефона до активации аккаунта"""
+  change_activation_phone(
+    """Новый телефон"""
+    phone: String
+  ): account_result
+
+  """Создание анкеты испольнителя"""
+  create_executor_form(
+    """Тип заработка (0 - дополнительный, 1 - основной)"""
+    income_type: Int
+
+    """Опыт работы"""
+    experience: String
+
+    """Дисцилины в которых разбирается исполнитель"""
+    subjects: String
+
+    """Действия если не сталкивался с заказом"""
+    actions_for_unknown_order: String
+
+    """План по завоеванию авторитета"""
+    authority_plan: String
+
+    """О себе"""
+    about_self: String
+
+    """Стимул к работе"""
+    stimulus: String
+
+    """Антиплагиат"""
+    antiplagiat: String
+
+    """Социальные профили"""
+    social: String
+
+    """Дата рождения"""
+    birthday: String
+  ): account_result
+
+  """Включение sms защиты аккаунта"""
+  enable_sms_protection(
+    """Телефонный номер"""
+    phone_number: String
+  ): result
+
+  """Включение sms защиты аккаунта"""
+  enable_sms_protection_confirm(
+    """Секретный код"""
+    secret_code: String
+  ): result
+
+  """Выключение смс защиты аккаунта"""
+  disable_sms_protection: result
+
+  """Выключение смс защиты аккаунта"""
+  disable_sms_protection_confirm(
+    """Секретный код"""
+    secret_code: String
+  ): result
+
+  """Аутентификация и получение токена"""
+  login(
+    """Логин"""
+    login: String
+
+    """Пароль"""
+    password: String
+  ): login_result
+
+  """Выход"""
+  logout: result
+
+  """Выход из всех устройств"""
+  logout_all_devices: result
+
+  """Активация аккаунта"""
+  activate_account(
+    """Токен"""
+    token: String
+  ): account_result
+
+  """Установка флага посещения страницы бонусов"""
+  bonuses_page_visited: account_result
+
+  """Ввод кода подтверждения действия"""
+  check_confirm_code(
+    """Подтверждаемое действие"""
+    action: String
+
+    """Код подтверждения"""
+    code: String
+  ): account_result
+
+  """Отправка ссылки активации оповещений на почту или телефон"""
+  send_activate_notify_link(
+    """Телефон или email для отправки"""
+    destination: String
+
+    """Ссылка активации оповещений"""
+    link: String
+  ): result
+
+  """Удаление сообщений"""
+  delete_messages(
+    """Идентификаторы сообщений"""
+    id: [ID]
+  ): result
+
+  """Удаление всех сообщений"""
+  delete_all_messages: result
+
+  """Удаление сообщений о новых заказах"""
+  delete_messages_of_orders(
+    """Идентификаторы сообщений"""
+    id: [ID]
+  ): result
+
+  """Удаление всех сообщений о новых заказах"""
+  delete_all_messages_of_orders: result
+
+  """Создание заказа"""
+  create_order(
+    """Тип задания"""
+    type: Int
+
+    """Название"""
+    name: String
+
+    """Текст задания"""
+    text: String
+
+    """Предмет"""
+    subject: String
+
+    """Антиплагиат"""
+    antiplagiat: Int
+
+    """Дата выполнения"""
+    date_deadline: String
+
+    """Для исполнителя"""
+    for_executor: ID
+
+    """Дополнительное поле 1"""
+    additional_info_1: String
+
+    """Дополнительное поле 2"""
+    additional_info_2: String
+  ): order_result
+
+  """Активация заказа"""
+  activate_order(
+    """Идентификатор заказа"""
+    order_id: ID
+  ): result
+
+  """Редактирование заказа"""
+  edit_order(
+    """Идентификатор заказа"""
+    order_id: ID
+
+    """Тип задания"""
+    type: Int
+
+    """Название"""
+    name: String
+
+    """Текст задания"""
+    text: String
+
+    """Предмет"""
+    subject: String
+
+    """Антиплагиат"""
+    antiplagiat: Int
+
+    """Дата выполнения"""
+    date_deadline: String
+
+    """Дополнительное поле 1"""
+    additional_info_1: String
+
+    """Дополнительное поле 2"""
+    additional_info_2: String
+  ): order_result
+
+  """Удаление заказа"""
+  delete_order(
+    """Идентификатор заказа"""
+    order_id: ID
+  ): result
+
+  """Отмена заказа"""
+  cancel_order(
+    """Идентификатор заказа"""
+    order_id: ID
+  ): order_result
+
+  """Открытие заказа"""
+  open_order(
+    """Идентификатор заказа"""
+    order_id: ID
+  ): order_result
+
+  """Публикация персонального заказа"""
+  publish_order(
+    """Идентификатор заказа"""
+    order_id: ID
+  ): order_result
+
+  """Применение услуги «Рекомендуемый заказ»"""
+  make_vip_order(
+    """Идентификатор заказа"""
+    order_id: ID
+
+    """Идентификатор тарифного плана"""
+    tariff_plan_id: ID
+
+    """Код подтверждения"""
+    confirmation_code: String
+
+    """Промокод"""
+    promo_code: String
+  ): order_result
+
+  """Совершение ставки"""
+  make_tender(
+    """Идентификатор заказа"""
+    order_id: ID
+
+    """Сумма"""
+    sum: Int
+
+    """Комментарий к ставке"""
+    comment: String
+  ): order_result
+
+  """Отмена ставки"""
+  cancel_tender(
+    """Идентификатор заказа"""
+    order_id: ID
+  ): order_result
+
+  """Изменение ставки"""
+  change_tender(
+    """Идентификатор заказа"""
+    order_id: ID
+
+    """Сумма"""
+    sum: Int
+
+    """Комментарий к ставке"""
+    comment: String
+  ): order_result
+
+  """Написание сообщение в чате заказа"""
+  send_order_message(
+    """Идентификатор заказа"""
+    order_id: ID
+
+    """Идентификатор пользователя - получателя"""
+    to_user_id: ID
+
+    """Сообщение"""
+    message: String
+  ): order_chat_message_result
+
+  """Скрытие заказа из списка"""
+  hide_order(
+    """Идентификатор заказа"""
+    order_id: ID
+  ): result
+
+  """Добавление заказа в избранное"""
+  add_favorit_order(
+    """Идентификатор заказа"""
+    order_id: ID
+  ): order_result
+
+  """Удаление заказа из избранного"""
+  remove_favorit_order(
+    """Идентификатор заказа"""
+    order_id: ID
+  ): order_result
+
+  """Выбор исполнителя для выполнения заказа"""
+  choice_executor(
+    """Идентификатор заказа"""
+    order_id: ID
+
+    """Идентификатор исполнителя"""
+    executor_id: ID
+  ): order_result
+
+  """Подтверждение исполнителя выполнить заказ"""
+  confirm_executor(
+    """Идентификатор заказа"""
+    order_id: ID
+  ): order_result
+
+  """Отказ исполнителя выполнить заказ"""
+  not_confirm_executor(
+    """Идентификатор заказа"""
+    order_id: ID
+  ): order_result
+
+  """Внос предоплаты за заказ"""
+  prepayment_order(
+    """Идентификатор заказа"""
+    order_id: ID
+  ): order_result
+
+  """Завершение выполнения заказа"""
+  complete_order(
+    """Идентификатор заказа"""
+    order_id: ID
+  ): order_result
+
+  """Отправка заказа на доработку"""
+  rework_order(
+    """Идентификатор заказа"""
+    order_id: ID
+  ): order_result
+
+  """Снятие заказа с гарантии"""
+  confirm_fulfillment_order(
+    """Идентификатор заказа"""
+    order_id: ID
+  ): order_result
+
+  """Подача заявки в арбитраж"""
+  apply_arbitration(
+    """Идентификатор заказа"""
+    order_id: ID
+
+    """Комментарий заявке"""
+    comment: String
+  ): order_result
+
+  """Написание отзыва"""
+  make_review(
+    """Идентификатор заказа"""
+    order_id: ID
+
+    """Тип"""
+    type: String
+
+    """Гарантия"""
+    guarantee: String
+
+    """Общение с исполнителем"""
+    feedback_rating: Int
+
+    """Как выполнен"""
+    executed: String
+
+    """Комментарий"""
+    comment: String
+
+    """Чаевые"""
+    gratuity: Int
+
+    """Больше не показывать форму с чаевыми"""
+    hide_gratuity: Boolean
+  ): order_result
+
+  """Отметка всех сообщений чата прочитанными"""
+  mark_unread_chat(
+    """Идентификатор заказа"""
+    order_id: ID
+
+    """Идентификатор собеседника"""
+    user_id: ID
+  ): result
+
+  """Отметка всех ставок просмотренными"""
+  mark_unread_tenders(
+    """Идентификатор заказа"""
+    order_id: ID
+  ): order_result
+
+  """Отметка всех файлов заказа просмотренными"""
+  mark_unread_files(
+    """Идентификатор заказа"""
+    order_id: ID
+  ): result
+
+  """Изменение даты выполнения заказа"""
+  change_date_deadline(
+    """Идентификатор заказа"""
+    order_id: ID
+
+    """Комментарий заявке"""
+    date_deadline: String
+  ): order_result
+
+  """Продление срока исполнителю для подтверждения ему выполнить заказ"""
+  extend_date_end_confirm(
+    """Идентификатор заказа"""
+    order_id: ID
+
+    """Количество часов"""
+    hours: Int
+  ): order_result
+
+  """Продление срока заказчику для внесения предоплаты"""
+  extend_date_end_prepayment(
+    """Идентификатор заказа"""
+    order_id: ID
+
+    """Количество часов"""
+    hours: Int
+  ): order_result
+
+  """Редактирование шаблона вывода средств"""
+  edit_payout_template(
+    """Идентификатор заказа"""
+    template_id: ID
+
+    """Название платежа"""
+    name: String
+
+    """Сумма платежа"""
+    sum: Int
+  ): payout_template_result
+
+  """Удаление шаблона на вывод средств"""
+  delete_payout_template(
+    """Идентификатор заказа"""
+    template_id: ID
+  ): result
+}
+
+"""Оповещение"""
+type notification {
+  """Идентификатор оповещения"""
+  id: ID
+
+  """Название оповещения"""
+  name: String
+
+  """Текст оповещения"""
+  text: String
+
+  """Тип оповещения"""
+  type: String
+}
+
+"""Статус операции"""
+type operation_status {
+  """Статус операции"""
+  status: String!
+
+  """Cообщение"""
+  message: String
+
+  """Код сообщения"""
+  code: Int
+}
+
+"""Заказ"""
+type order {
+  """Идентификатор"""
+  id: ID!
+
+  """Статус"""
+  status: String!
+
+  """Детальная информация по статусу"""
+  status_details: String
+
+  """Цвет иконки статуса"""
+  status_color: String
+
+  """Полная ли информация по заказу"""
+  full_info: Boolean
+
+  """Находится ли заказ в арбитраже"""
+  arbitration: Boolean
+
+  """Является ли заказ 'Рекомендуемым'"""
+  vip: Boolean
+
+  """Является ли заказ избранным"""
+  favorite: Boolean
+
+  """Тип"""
+  type: order_type
+
+  """Название"""
+  name: String!
+
+  """Текст задания"""
+  text: String!
+
+  """Предмет"""
+  subject: String!
+
+  """Антиплагиат"""
+  antiplagiat: Int!
+
+  """Заказчик"""
+  customer: user
+
+  """Фрилансер"""
+  executor: user
+
+  """Заказ для исполнителя"""
+  for_executor: user
+
+  """Отзыв"""
+  review: review
+
+  """Дата создания"""
+  date_created: String!
+
+  """Дата выполнения"""
+  date_deadline: String!
+
+  """Дата окончания услуги 'Рекомендуемый заказ'"""
+  date_end_vip: String
+
+  """Файлы"""
+  files: [order_file]
+
+  """Количество новых файлов"""
+  new_files: Int
+
+  """Количество новых сообщений в чате"""
+  new_chat_messages: Int
+
+  """Чаты"""
+  chats: [order_chat]
+
+  """Ставки"""
+  tenders: order_tenders
+
+  """Стоимость заказа"""
+  price: Int
+
+  """Доля бонусов"""
+  bonus_part: Int
+
+  """Кнопки управления"""
+  show_control: Boolean
+
+  """Причина"""
+  reason: String
+
+  """Дополнительное поле 1"""
+  additional_info_1: String
+
+  """Дополнительное поле 2"""
+  additional_info_2: String
+}
+
+"""Чат заказа"""
+type order_chat {
+  """Собеседник"""
+  from_user: user!
+
+  """Сообщения"""
+  messages: [order_chat_message]
+
+  """Количество новых сообщений"""
+  new_messages: Int!
+}
+
+"""Сообщение чата заказа"""
+type order_chat_message {
+  """Идентификатор"""
+  id: ID!
+
+  """Отправитель"""
+  from_user: user!
+
+  """Дата отправки"""
+  date_send: String!
+
+  """Сообщение"""
+  message: String!
+
+  """Новое сообщение"""
+  new: Boolean!
+}
+
+"""Результат"""
+type order_chat_message_result {
+  """Сообщение"""
+  message: order_chat_message
+
+  """Информация о проделанной операции"""
+  operation_status: operation_status
+}
+
+"""Файл заказа"""
+type order_file {
+  """Идентификатор"""
+  id: ID!
+
+  """Идентификатор заказа"""
+  order_id: ID!
+
+  """Тип файла"""
+  type: String!
+
+  """Загрузивший"""
+  user: user!
+
+  """Дата загрузки"""
+  date_upload: String!
+
+  """Ссылка на файл"""
+  url: String!
+
+  """Название"""
+  name: String!
+
+  """Транслитное название"""
+  translate_name: String!
+
+  """Размер"""
+  size: String!
+
+  """Файл новый"""
+  new: Boolean!
+}
+
+"""Результат"""
+type order_result {
+  """Заказ"""
+  order: order
+
+  """Информация о проделанной операции"""
+  operation_status: operation_status
+}
+
+"""Ставка по заказу"""
+type order_tender {
+  """Идентификатор"""
+  id: ID!
+
+  """Отправитель"""
+  from_user: user!
+
+  """Дата отправки"""
+  date_send: String!
+
+  """Сумма"""
+  sum: Int!
+
+  """Доля бонусов"""
+  bonus_part: Int
+
+  """Комментарий"""
+  comment: String
+}
+
+"""Результат"""
+type order_tender_result {
+  """Ставка"""
+  tender: order_tender
+
+  """Информация о проделанной операции"""
+  operation_status: operation_status
+}
+
+"""Ставки по заказу"""
+type order_tenders {
+  """Ставки"""
+  list: [order_tender]
+
+  """Количество ставок"""
+  count_tenders: Int!
+
+  """Количество новых ставок"""
+  new_tenders: Int!
+
+  """Количество закрытих ставок"""
+  ended_tenders: Int!
+}
+
+"""Тип заказа"""
+type order_type {
+  """Идентификатор"""
+  id: ID!
+
+  """Название"""
+  name: String!
+
+  """Название в родительском падеже"""
+  name_rp: String
+
+  """Порядок"""
+  ordering: Int!
+
+  """Ссылка"""
+  link: String
+}
+
+input OrderByClause {
+  field: String!
+  order: SortOrder!
+}
+
+"""Список заказов"""
+type orders_list {
+  """Заказы"""
+  list: [order]
+
+  """Пагинация"""
+  pagination: pagination
+}
+
+type PageInfo {
+  """When paginating forwards, are there more items?"""
+  hasNextPage: Boolean!
+
+  """When paginating backwards, are there more items?"""
+  hasPreviousPage: Boolean!
+
+  """When paginating backwards, the cursor to continue."""
+  startCursor: String
+
+  """When paginating forwards, the cursor to continue."""
+  endCursor: String
+
+  """Total number of node in connection."""
+  total: Int
+
+  """Count of nodes in current request."""
+  count: Int
+
+  """Current page of request."""
+  currentPage: Int
+
+  """Last page in connection."""
+  lastPage: Int
+}
+
+"""Информация о постраничной навигации"""
+type pagination {
+  """Текущая страница"""
+  current_page: Int!
+
+  """Последняя страница"""
+  last_page: Int!
+
+  """Запрашиваемое количество записей"""
+  per_page: Int!
+
+  """Всего записей по факту"""
+  total: Int!
+
+  """Записей на странице по факту"""
+  count: Int!
+
+  """Столбец сортировки"""
+  order_column: String
+
+  """Направление сортировки"""
+  order_direction: String
+}
+
+type PaginatorInfo {
+  """Total count of available items in the page."""
+  count: Int!
+
+  """Current pagination page."""
+  currentPage: Int!
+
+  """Index of first item in the current page."""
+  firstItem: Int
+
+  """If collection has more pages."""
+  hasMorePages: Boolean!
+
+  """Index of last item in the current page."""
+  lastItem: Int
+
+  """Last page number of the collection."""
+  lastPage: Int!
+
+  """Number of items per page in the collection."""
+  perPage: Int!
+
+  """Total items available in the collection."""
+  total: Int!
+}
+
+"""Статистика по заказчикам"""
+type partner_customers {
+  """Дата"""
+  date: String!
+
+  """Количество переходов"""
+  count_following: Int!
+
+  """Количество заказчиков"""
+  count_customers: Int!
+}
+
+"""Список информации по заказчикам"""
+type partner_customers_list {
+  """Данные"""
+  list: [partner_customers]
+
+  """Пагинация"""
+  pagination: pagination
+}
+
+"""Статистика по переходам"""
+type partner_following {
+  """Дата"""
+  date: String!
+
+  """Количество переходов"""
+  count_following: Int!
+
+  """Источник перехода"""
+  source: String!
+}
+
+"""Список информации по переходам"""
+type partner_following_list {
+  """Данные"""
+  list: [partner_following]
+
+  """Пагинация"""
+  pagination: pagination
+}
+
+"""Статистика по доходу"""
+type partner_income {
+  """Дата"""
+  date: String!
+
+  """Заказ"""
+  order: order!
+
+  """Стоимость заказа"""
+  sum: Int!
+
+  """Доход"""
+  income: Int!
+}
+
+"""Статистика по ожидаемому доходу"""
+type partner_income_expected {
+  """Дата"""
+  date: String!
+
+  """Заказ"""
+  order: order!
+
+  """Стоимость заказа"""
+  sum: Int!
+
+  """Ожидаемый доход"""
+  expected_income: Int!
+}
+
+"""Список информации по ожидаемым доходам"""
+type partner_income_expected_list {
+  """Данные"""
+  list: [partner_income_expected]
+
+  """Пагинация"""
+  pagination: pagination
+}
+
+"""Список информации по доходам"""
+type partner_income_list {
+  """Данные"""
+  list: [partner_income]
+
+  """Пагинация"""
+  pagination: pagination
+}
+
+"""Общая статистика по партнерской программе"""
+type partner_main_statistics {
+  """Всего переходов"""
+  count_following: Int!
+
+  """Всего зарегистрировалось заказчиков"""
+  count_customers: Int!
+
+  """Количество активных заказчиков"""
+  count_active_customers: Int!
+
+  """Общий доход"""
+  count_income: Int!
+
+  """Общий ожидаемый доход"""
+  count_income_expected: Int!
+
+  """Количество заказов"""
+  count_orders: Int!
+
+  """Количество оплаченных заказов"""
+  count_paid_orders: Int!
+
+  """Начало периода"""
+  period_begin: String
+
+  """Конец периода"""
+  period_end: String
+}
+
+"""Статистика по заказам"""
+type partner_orders {
+  """Дата"""
+  date: String!
+
+  """Количество заказов"""
+  count_orders: Int!
+
+  """Количество оплаченных заказов"""
+  count_paid_orders: Int!
+}
+
+"""Список информации по заказам"""
+type partner_orders_list {
+  """Данные"""
+  list: [partner_orders]
+
+  """Пагинация"""
+  pagination: pagination
+}
+
+"""Платеж"""
+type payment {
+  """Идентификатор"""
+  id: ID!
+
+  """Тип платежа"""
+  type: String!
+
+  """Идентификатор заказа"""
+  order_id: ID
+
+  """Дата создания"""
+  date_create: String!
+
+  """Дата выполнения"""
+  date_execute: String
+
+  """Сумма"""
+  sum: Int!
+
+  """Часть суммы, оплаченная бонусами"""
+  bonus_part: Int!
+
+  """Часть суммы, оплаченная кешбеком"""
+  cashback_part: Int!
+
+  """Статус"""
+  status: String!
+
+  """Комментарий"""
+  comment: String!
+
+  """Комментарий"""
+  note: String
+}
+
+"""Комиссия"""
+type payment_commission {
+  """Процент"""
+  percent: Float
+
+  """Фиксированная"""
+  fixed: Float
+}
+
+"""Группа платежных методов"""
+type payment_group {
+  """Название"""
+  name: String!
+
+  """Системное название"""
+  system_name: String!
+
+  """Информация"""
+  info: String
+
+  """Методы"""
+  methods: [payment_method]
+}
+
+"""Платежный метод"""
+type payment_method {
+  """Название"""
+  name: String!
+
+  """Системное название"""
+  system_name: String!
+
+  """Комиссия"""
+  commission: payment_commission
+
+  """Сумма"""
+  range_sum: payment_sum
+
+  """Настройки для рендера формы"""
+  render_form: String
+
+  """Настройка"""
+  config: String
+}
+
+"""Список платежных методов"""
+type payment_methods_list {
+  """Методы"""
+  groups: [payment_group]
+
+  """Токен подтверждения"""
+  token: String
+}
+
+"""Результат"""
+type payment_result {
+  """Платеж"""
+  payment: payment
+
+  """Информация о проделанной операции"""
+  operation_status: operation_status
+}
+
+"""Сумма"""
+type payment_sum {
+  """Минимальная сумма"""
+  min: Int
+
+  """Максимальная сумма"""
+  max: Int
+}
+
+"""Список платежей"""
+type payments_list {
+  """Платежи"""
+  list: [payment]
+
+  """Пагинация"""
+  pagination: pagination
+}
+
+"""Шаблон платежа на вывод средств"""
+type payout_template {
+  """Идентификатор платежа"""
+  id: ID!
+
+  """Название платежа"""
+  name: String
+
+  """Группа вывода"""
+  group: String
+
+  """Способ вывода"""
+  method: String
+
+  """Сумма платежа"""
+  sum: Int
+
+  """Аккаунт"""
+  account: String
+
+  """Имя пользователя"""
+  user_name: String
+
+  """Телефон"""
+  phone: String
+
+  """Оператор"""
+  operator: String
+}
+
+"""Результат"""
+type payout_template_result {
+  """Шаблон"""
+  payout_template: payout_template
+
+  """Информация о проделанной операции"""
+  operation_status: operation_status
+}
+
+type Query {
+  """Запрос информации об аккаунте"""
+  auth_info: auth_info
+
+  """Запрос статистики исполнителя за период"""
+  executor_statistics(
+    """Фильтр: начальная дата"""
+    period_begin: String
+
+    """Фильтр: конечная дата"""
+    period_end: String
+  ): executor_statistics
+
+  """Запрос оповещений"""
+  notifications: [notification]
+
+  """Запрос списка 'мои исполнители'"""
+  my_executors(
+    """Текст поиска"""
+    search_text: String
+    page: Int
+    per_page: Int
+    order_by: String
+  ): executors_list
+
+  """Запрос списка сессий"""
+  sessions(
+    """Статус сессии: active, exit, extended, end"""
+    type: [String]
+    page: Int
+    per_page: Int
+    order_by: String
+  ): sessions_list
+
+  """Запрос списка сообщений"""
+  messages(page: Int, per_page: Int, order_by: String): messages_list
+
+  """Запрос списка сообщений о новых заказах"""
+  messages_of_orders(page: Int, per_page: Int, order_by: String): messages_list
+
+  """Информация о пользователе"""
+  user(
+    """Идентификатор пользователя"""
+    id: ID!
+  ): user
+
+  """Запрос данных заказа"""
+  order(
+    """Идентификатор заказа"""
+    id: ID!
+  ): order
+
+  """Запрос списка заказов для пользователя"""
+  orders(
+    """
+    Статусы заказов: new - Новый, past - Прошедший, confirmation - На
+    подтверждении, wait_payment - Ожидание оплаты, execution - На выполнении,
+    guarantee - На гарантии, complete - Выполнен, rework - На доработке
+    """
+    status: [String]
+
+    """
+    Категория заказов: active - Активные, prices - Предложенные цены, past -
+    Прошедшие, execution - На выполнении, complete - Готовые, favorit - Избранные
+    """
+    category: String
+
+    """Фильтр: начальная дата"""
+    period_begin: String
+
+    """Фильтр: конечная дата"""
+    period_end: String
+
+    """Текст поиска"""
+    search_text: String
+
+    """Поиск по имени"""
+    search_by_name: String
+
+    """Поиск по id исполнителя"""
+    executor_id: ID
+    page: Int
+    per_page: Int
+    order_by: String
+  ): orders_list
+
+  """Запрос списка заказов текущего заказчика по статусам"""
+  customer_orders_by_status(
+    """
+    Статусы заказов: new - Новый, past - Прошедший, confirmation - На
+    подтверждении, wait_payment - Ожидание оплаты, execution - На выполнении,
+    guarantee - На гарантии, complete - Выполнен, rework - На доработке
+    """
+    status: [String]
+
+    """Текст поиска"""
+    search_text: String
+    page: Int
+    per_page: Int
+    order_by: String
+  ): customer_orders_by_status_list
+
+  """Поиск новых заказов"""
+  search_new_orders(
+    """Текст поиска"""
+    search_text: String
+
+    """Фильтр: начальная дата"""
+    period_begin: String
+
+    """Фильтр: конечная дата"""
+    period_end: String
+
+    """Типы заказов"""
+    order_types: [Int]
+
+    """Срочные заказы"""
+    rush_orders: Boolean
+
+    """Свежие заказы"""
+    fresh_orders: Boolean
+
+    """Заказы без ставок"""
+    no_prices_orders: Boolean
+
+    """Из резюме"""
+    by_resume: Boolean
+
+    """Заказы из авторассылки"""
+    from_autosending_orders: Boolean
+    page: Int
+    per_page: Int
+    order_by: String
+  ): orders_list
+
+  """Поиск заказов"""
+  search_orders(
+    """Текст поиска"""
+    search_text: String
+
+    """Фильтр: начальная дата"""
+    period_begin: String
+
+    """Фильтр: конечная дата"""
+    period_end: String
+
+    """
+    Статусы заказов: new - Новый, past - Прошедший, confirmation - На
+    подтверждении, wait_payment - Ожидание оплаты, execution - На выполнении,
+    guarantee - На гарантии, complete - Выполнен, rework - На доработке
+    """
+    status: [String]
+
+    """Поиск по имени"""
+    search_by_name: Boolean
+    page: Int
+    per_page: Int
+    order_by: String
+  ): search_orders_list
+
+  """Запрос данных типа заказа"""
+  order_type(
+    """Идентификатор типа"""
+    id: ID!
+  ): order_type
+
+  """Запрос списка типов заказа"""
+  order_types: [order_type]
+
+  """Запрос списка тарифных планов"""
+  vip_order_tariff_plans: vip_order_tariff_plans
+
+  """Запрос информации о файле"""
+  order_file(
+    """Идентификатор файла"""
+    id: ID!
+  ): order_file
+
+  """Запрос чата заказа"""
+  order_chat(
+    """Идентификатор заказа"""
+    order_id: ID!
+
+    """Идентификатор пользователя"""
+    user_id: ID!
+  ): order_chat
+
+  """Запрос сообщения чата заказа"""
+  order_chat_message(
+    """Идентификатор сообщения"""
+    id: ID!
+  ): order_chat_message
+
+  """Запрос информации об отзыве"""
+  review(
+    """Идентификатор заказа"""
+    order_id: ID!
+  ): review
+
+  """Запрос списка платежей"""
+  payments(
+    """Фильтр: начальная дата"""
+    period_begin: String
+
+    """Фильтр: конечная дата"""
+    period_end: String
+
+    """Тип платежа: in, out"""
+    type: String
+
+    """
+    Статус платежей: completed - Выполнено, withdrawn - Средства выведены,
+    frozen - Заморожено, arbitration - На арбитраже, return - Деньги возвращены,
+    processing - Заявка обрабатывается, canceled - Заявка отменена
+    """
+    status: String
+    page: Int
+    per_page: Int
+    order_by: String
+  ): payments_list
+
+  """Запрос списка способов оплаты"""
+  payment_methods(
+    """Тип: in, out"""
+    type: String
+
+    """Настройки для страны"""
+    country: String
+  ): payment_methods_list
+
+  """Запрос списка шаблонов на вывод средств"""
+  payout_templates: [payout_template]
+
+  """Запрос общей информации по реферальной программе"""
+  referral_main_statistics(
+    """Фильтр: начальная дата"""
+    period_begin: String
+
+    """Фильтр: конечная дата"""
+    period_end: String
+  ): referral_main_statistics
+
+  """Запрос всей информации по реферальной программе"""
+  referral_summary_data(
+    """Фильтр: начальная дата"""
+    period_begin: String
+
+    """Фильтр: конечная дата"""
+    period_end: String
+    page: Int
+    per_page: Int
+    order_by: String
+  ): referral_summary_data_list
+
+  """Запрос информации по переходам"""
+  referral_following(
+    """Фильтр: начальная дата"""
+    period_begin: String
+
+    """Фильтр: конечная дата"""
+    period_end: String
+    page: Int
+    per_page: Int
+    order_by: String
+  ): referral_following_list
+
+  """Запрос информации по регистрациям"""
+  referral_registrations(
+    """Фильтр: начальная дата"""
+    period_begin: String
+
+    """Фильтр: конечная дата"""
+    period_end: String
+    page: Int
+    per_page: Int
+    order_by: String
+  ): referral_registrations_list
+
+  """Запрос информации по доходам"""
+  referral_income(
+    """Фильтр: начальная дата"""
+    period_begin: String
+
+    """Фильтр: конечная дата"""
+    period_end: String
+    page: Int
+    per_page: Int
+    order_by: String
+  ): referral_income_list
+
+  """Запрос общей информации по партнерской программе"""
+  partner_main_statistics(
+    """Фильтр: начальная дата"""
+    period_begin: String
+
+    """Фильтр: конечная дата"""
+    period_end: String
+  ): partner_main_statistics
+
+  """Запрос информации по доходам"""
+  partner_income(
+    """Фильтр: начальная дата"""
+    period_begin: String
+
+    """Фильтр: конечная дата"""
+    period_end: String
+    page: Int
+    per_page: Int
+    order_by: String
+  ): partner_income_list
+
+  """Запрос информации по ожидаемому доходу"""
+  partner_income_expected(page: Int, per_page: Int, order_by: String): partner_income_expected_list
+
+  """Запрос информации по переходам"""
+  partner_following(
+    """Фильтр: начальная дата"""
+    period_begin: String
+
+    """Фильтр: конечная дата"""
+    period_end: String
+    page: Int
+    per_page: Int
+    order_by: String
+  ): partner_following_list
+
+  """Запрос информации по заказам"""
+  partner_orders(
+    """Фильтр: начальная дата"""
+    period_begin: String
+
+    """Фильтр: конечная дата"""
+    period_end: String
+    page: Int
+    per_page: Int
+    order_by: String
+  ): partner_orders_list
+
+  """Запрос информации по заказчикам"""
+  partner_customers(
+    """Фильтр: начальная дата"""
+    period_begin: String
+
+    """Фильтр: конечная дата"""
+    period_end: String
+    page: Int
+    per_page: Int
+    order_by: String
+  ): partner_customers_list
+}
+
+"""Статистика по переходам"""
+type referral_following {
+  """Дата"""
+  date: String!
+
+  """Количество переходов"""
+  count_following: Int!
+
+  """Источник перехода"""
+  source: String!
+}
+
+"""Список информации по переходам"""
+type referral_following_list {
+  """Данные"""
+  list: [referral_following]
+
+  """Пагинация"""
+  pagination: pagination
+}
+
+"""Статистика по доходу"""
+type referral_income {
+  """Дата"""
+  date: String!
+
+  """Доход"""
+  income: Int!
+}
+
+"""Список информации по доходам"""
+type referral_income_list {
+  """Данные"""
+  list: [referral_income]
+
+  """Пагинация"""
+  pagination: pagination
+}
+
+"""Общая статистика по реферальной программе"""
+type referral_main_statistics {
+  """Всего переходов"""
+  count_following: Int!
+
+  """Всего регистраций"""
+  count_registrations: Int!
+
+  """Общий доход"""
+  count_income: Int!
+
+  """Общий ожидаемый доход"""
+  count_income_expected: Int!
+
+  """Начало периода"""
+  period_begin: String
+
+  """Конец периода"""
+  period_end: String
+}
+
+"""Статистика по регистрациям"""
+type referral_registrations {
+  """Дата"""
+  date: String!
+
+  """Количество регистраций"""
+  count_registrations: Int!
+}
+
+"""Список информации по регистрациям"""
+type referral_registrations_list {
+  """Данные"""
+  list: [referral_registrations]
+
+  """Пагинация"""
+  pagination: pagination
+}
+
+"""Сводная статистика по реферальной программе"""
+type referral_summary_data {
+  """Дата"""
+  date: String!
+
+  """Событие"""
+  event: String!
+
+  """Количество"""
+  count: Int!
+
+  """Комментарий"""
+  comment: String
+}
+
+"""Список всей информации по реферальной программ"""
+type referral_summary_data_list {
+  """Данные"""
+  list: [referral_summary_data]
+
+  """Пагинация"""
+  pagination: pagination
+}
+
+"""Результат"""
+type result {
+  """Информация о проделанной операции"""
+  operation_status: operation_status
+}
+
+"""Отзыв"""
+type review {
+  """Идентификатор"""
+  id: ID!
+
+  """Заказ"""
+  order: order!
+
+  """Фрилансер"""
+  executor: user!
+
+  """Дата написания отзыва"""
+  date_create: String!
+
+  """Тип"""
+  type: String
+
+  """Гарантия"""
+  guarantee: String
+
+  """Общение с исполнителем"""
+  feedback_rating: Int
+
+  """Как выполнен"""
+  executed: String
+
+  """Комментарий"""
+  comment: String
+}
+
+"""Список отзывов"""
+type reviews_list {
+  """Отзывы"""
+  list: [review]
+
+  """Пагинация"""
+  pagination: pagination
+}
+
+"""Результат поиска заказов"""
+type search_orders_list {
+  """Список активных заказов с пагинацией"""
+  active: orders_list
+
+  """Список заказов с предложенными ценами с пагинацией"""
+  prices: orders_list
+
+  """Список прошедших заказов с пагинацией"""
+  past: orders_list
+
+  """Список выполненных заказов с пагинацией"""
+  execution: orders_list
+
+  """Список выполненных заказов с пагинацией"""
+  complete: orders_list
+
+  """Список избранных заказов с пагинацией"""
+  favorit: orders_list
+}
+
+"""Сессия пользователя"""
+type session {
+  """Идентификатор"""
+  id: ID!
+
+  """Тип"""
+  type: String!
+
+  """Статус"""
+  status: String!
+
+  """IP адрес"""
+  ip: String
+
+  """User agent"""
+  user_agent: String
+
+  """Дата начала"""
+  date_begin: String
+}
+
+"""Список сессий пользователя"""
+type sessions_list {
+  """Сессии"""
+  list: [session]
+
+  """Пагинация"""
+  pagination: pagination
+}
+
+enum SortOrder {
+  ASC
+  DESC
+}
+
+"""Пользователь"""
+type user {
+  """Идентификатор"""
+  id: ID!
+
+  """Логин"""
+  login: String!
+
+  """Надежный"""
+  reliable: Boolean
+
+  """Группа"""
+  group: user_group
+
+  """Профиль"""
+  profile: user_profile
+
+  """Статистика по заказам"""
+  orders_statistics: user_orders_statistics
+
+  """Статистика по отзывам"""
+  reviews_statistics: user_reviews_statistics
+
+  """URL ссылка на аватар"""
+  avatar: String!
+
+  """URL ссылка на профиль"""
+  small_avatar: String!
+
+  """URL ссылка на профиль"""
+  profile_link: String!
+
+  """Дата регистрации"""
+  date_registration: String!
+
+  """Дата последнего визита"""
+  date_last_visit: String
+}
+
+"""Группа пользователя"""
+type user_group {
+  """Идентификатор"""
+  id: ID!
+
+  """Название"""
+  name: String!
+}
+
+"""Статистика по заказам исполнителя"""
+type user_orders_statistics {
+  """Рейтинг"""
+  rating: Int
+
+  """Выполнено заказов"""
+  completed: Int
+
+  """Выполнено заказов (на проверке)"""
+  completed_in_verify: Int
+
+  """Не выполнено заказов"""
+  not_completed: Int
+
+  """Заказы на выполнении"""
+  execution: Int
+
+  """Заказы на выполнении (просроченные)"""
+  execution_overdue: Int
+
+  """Заказов на доработке"""
+  rework: Int
+}
+
+"""Профиль пользователя"""
+type user_profile {
+  """Город"""
+  city: String
+
+  """Учебное заведение"""
+  institution: String
+
+  """Факультет"""
+  faculty: String
+
+  """Специальность"""
+  specialty: String
+
+  """Опыт работы"""
+  experience: String
+
+  """Ключевые слова"""
+  keywords: String
+
+  """Предметы"""
+  subjects: [String]
+}
+
+"""Отзывы исполнителя"""
+type user_reviews_statistics {
+  """Количество заказов выполнено досрочно"""
+  orders_early: Int
+
+  """Количество заказов выполнено вовремя"""
+  orders_on_time: Int
+
+  """Количество заказов выполнено после срока"""
+  orders_overdue: Int
+
+  """Доработки - без замечаний"""
+  rework_not_remark: Int
+
+  """Доработки - все замечания исправлены"""
+  rework_fix: Int
+
+  """Доработки - замечания частично исправлены"""
+  rework_fix_partially: Int
+
+  """Доработки - замечания не исправлены"""
+  rework_not_fix: Int
+
+  """Отзывы - положительные"""
+  review_positive: Int
+
+  """Отзывы - отрицательные"""
+  review_negative: Int
+
+  """Отзывы - нейтральные"""
+  review_neutral: Int
+}
+
+"""Настройки пользователя"""
+type user_settings {
+  """Оповещение по электронной почте"""
+  notification_on_mail: String
+
+  """Оповещение по VK"""
+  notification_on_vk: String
+
+  """Оповещение по Telegram"""
+  notification_on_telegram: String
+
+  """Оповещение по Viber"""
+  notification_on_viber: String
+
+  """Оповещение по WhatsApp"""
+  notification_on_whats_app: String
+
+  """Токен на включение оповещений в телеграм и вайбер"""
+  subscribe_messenger_token: String
+
+  """Показ подсказок"""
+  help_show: String
+
+  """СМС защита"""
+  sms_protection: String
+
+  """Телефон СМС защиты"""
+  sms_protection_phone: String
+
+  """Прием сообщений от незнакомых заказчиков"""
+  message_unknown_customer: String
+
+  """Настройка оповещения о новых заказах"""
+  notification_new_order: String
+
+  """Настройка группировки писем о новых заказах"""
+  group_sending_orders: String
+}
+
+"""Список тарифных планов"""
+type vip_order_tariff_plan {
+  """Идентификатор"""
+  id: ID!
+
+  """Описание тарифного плана"""
+  description: String!
+}
+
+"""Результат запроса списка тарифных планов"""
+type vip_order_tariff_plans {
+  """Список тарифных планов"""
+  tariff_plans: [vip_order_tariff_plan]
+
+  """Код подтверждения"""
+  confirmation_code: String!
+}
+
